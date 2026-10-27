@@ -1,6 +1,6 @@
 # mubit-cli
 
-The command-line client for Mubit. Version 1.0.2.
+The command-line client for Mubit. Version 1.0.3.
 
 Mubit learns from the model calls your agents already make. Send your OpenAI, Anthropic or Gemini calls through Mubit, and it:
 
@@ -51,7 +51,26 @@ Run `mubit-cli --version` to check the install, and `mubit-cli --help` for the l
 
 ## Sign in
 
-`mubit-cli` signs in with a management key. It starts with `mwm_`, and you create it in the console at https://app.mubit.ai. (Inference keys, which start with `mw_`, are for sending model calls through Mubit. The CLI doesn't use them.)
+`mubit-cli` signs in with a management key. It starts with `mwm_`. (Inference keys, which start with `mw_`, are for sending model calls through Mubit. The CLI doesn't use them.)
+
+Only an admin of your organization can create a management key. If you aren't an admin, ask an admin of your organization to create one for you. The console shows a new key once, so copy it when it appears. If you lose a key, create a new one.
+
+To create a management key:
+
+1. Sign in at https://app.mubit.ai.
+2. Open **All projects**. In the sidebar, under **Workspace**, select **Management keys**.
+3. Select **Create management key**.
+4. Enter a **Key name**, and choose a **Role**. The table below shows what each role can do.
+5. Optional: choose a **Project scope** to limit the key to one project. The default is **All projects (organization-wide)**.
+6. Select **Create management key** again. Select **Copy key**, save the key, and select **Done**.
+
+| Role | What the key can do |
+| --- | --- |
+| `read` | Read everything except the list of management keys |
+| `member` | Also rate calls, review training examples and import past calls |
+| `admin` | Everything |
+
+Then give the key to the CLI:
 
 ```bash
 export MUBIT_MANAGEMENT_KEY=mwm_...     # read on every run; nothing is stored
