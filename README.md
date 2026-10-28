@@ -1,6 +1,6 @@
 # mubit-cli
 
-The command-line client for Mubit. Version 1.0.3.
+The command-line client for Mubit. Version 1.0.4.
 
 Mubit learns from the model calls your agents already make. Send your OpenAI, Anthropic or Gemini calls through Mubit, and it:
 
@@ -124,6 +124,17 @@ What you can do, by area:
 | List, create, rotate and revoke a project's inference keys | `mubit-cli keys ls --project <id>`, `mubit-cli keys create --project <id> --name <name>`, `mubit-cli keys rotate <id>`, `mubit-cli keys revoke <id>` |
 | List, add, rotate and delete the provider keys Mubit calls providers with | `mubit-cli providers ls`, `mubit-cli providers add <provider>`, `mubit-cli providers rotate <id>`, `mubit-cli providers delete <id>` |
 | List, create, rotate and revoke management keys | `mubit-cli management-keys ls`, `mubit-cli management-keys create --name <name> --role <role>`, `mubit-cli management-keys rotate <id>`, `mubit-cli management-keys revoke <id>` |
+
+A provider key is the key Mubit calls a model provider with. `mubit-cli providers ls` lists them by provider id, such as `openai`, `anthropic`, `gemini` or `neon`. Only an admin of your organization can add, rotate or delete a provider key.
+
+The Neon AI Gateway is the provider `neon`. A call on the Anthropic, OpenAI or Gemini route goes to the project's Neon key when the project has no key of its own for that provider.
+
+To add a Neon key, sign in to the console at https://app.mubit.ai. Open **All projects**. In the sidebar, under **Workspace**, select **Provider keys**. Add a key, choose **Neon AI Gateway**, and enter two things:
+
+- **Gateway URL**: the AI Gateway URL of your Neon branch. It is `https://` and the host, with no path, port or query. For example, `https://br-example-123456-api.ai.c-2.us-east-2.aws.neon.tech`.
+- **Token**: a Neon token that starts with `nt_live_` and has the `ai_gateway:invoke` scope.
+
+The list of providers shows **Neon AI Gateway** only where Neon is turned on for your organization. The region of a Neon key is always `global`. Mubit checks the token with Neon before it saves the key. To rotate a Neon key, enter a new token: the URL stays the key's own. To use another URL, delete the key and add it again.
 
 ### Calls
 
