@@ -1,6 +1,8 @@
 # mubit-cli
 
-The command-line client for Mubit. Version 1.0.4.
+The command-line client for Mubit. Version 1.0.5.
+
+Documentation: https://docs.mubit.ai
 
 Mubit learns from the model calls your agents already make. Send your OpenAI, Anthropic or Gemini calls through Mubit, and it:
 
